@@ -1,18 +1,40 @@
 const Posts = require("../models/posts_model");
 const { ObjectId } = require("mongoose");
 const getAllPosts = async (req, res) => {
-  const filter = req.query;
-  console.log(filter);
+  const filter = req.query;  // filter query parameters
+  console.log('Received filter:', filter); 
+
   try {
+    let posts;
+
+    //  filter by owner
     if (filter.owner) {
-      const posts = await Posts.find({ owner: filter.owner });
-      return res.send(posts);
+ 
+      // search posts for the specified owner
+      posts = await Posts.find({ owner: filter.owner });
+
+      // If no posts are found for the given owner
+      if (posts.length === 0) {
+        return res.status(404).send("No posts found for the specified owner.");
+      }
     } else {
-      const posts = await Posts.find();
-      return res.send(posts);
+      // If no owner filter is applied
+      posts = await Posts.find();
+
+      // If no posts are found
+      if (posts.length === 0) {
+        return res.status(404).send("No posts available.");
+      }
     }
+
+    // Return the posts if they were found
+    console.log("Found posts:", posts);  
+    return res.send(posts);
+
   } catch (err) {
-    return res.status(400).send(err.message);
+    // Catch unexpected errors
+    console.error("Error fetching posts:", err.message);
+    return res.status(500).send({ message: "Server error while fetching posts", error: err.message });
   }
 };
 
