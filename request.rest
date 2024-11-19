@@ -1,0 +1,31 @@
+
+###
+//all posts
+GET http://localhost:3000/posts
+
+###
+//by id
+GET http://localhost:3000/posts/673bbf224056bc67daa49f07
+
+###
+//by owner
+GET http://localhost:3000/posts?owner=chek
+
+###
+//add post
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+    "owner": "chek",
+    "title": "My Second post",
+    "content": "This is my first post"
+}
+
+
+###
+//delete post
+DELETE http://localhost:3000/posts/142341234
+
+###
+
