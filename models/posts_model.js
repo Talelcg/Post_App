@@ -16,5 +16,5 @@ const postsSchema = new Schema({
   }, {
     versionKey: false  // Disable versioning
   });
-const Posts = mongoose.model("Posts", postsSchema);
-module.exports = Posts;
+
+module.exports = mongoose.model('Posts', postsSchema);
