@@ -1,34 +1,94 @@
 
+###############################################################################################################################
+Posts
+###############################################################################################################################
+
 ###
 //all posts
+
 GET http://localhost:3000/posts
 
 ###
 //by id
-GET http://localhost:3000/posts/673cf6382cc4abe9e227be4e
+
+GET http://localhost:3000/posts/03450934509345
 
 ###
 //by owner
+
 GET http://localhost:3000/posts?owner=chek
 
 
 
 #################################
 //add post
+
 POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
     "owner": "chek",
     "title": "My title",
-    "content": "This is a post"
+    "content": "This is a post7"
 }
-
 
 ###
 //delete post
-//DELETE http://localhost:3000/posts/142341234
-###
-//update post
-//UPDATE http://localhost:3000/posts/
-###
+DELETE http://localhost:3000/posts/03450934509345
+
+### Update a post
+PUT http://localhost:3000/posts/03450934509345
+Content-Type: application/json
+
+{
+    "title": "Just got updated",
+    "content": "Update!!",
+    "owner": "check2"
+}
+
+###############################################################################################################################
+Comments
+###############################################################################################################################
+
+### Get All Comments
+
+GET http://localhost:3000/comments
+
+### Add a New Comment(first)
+
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+    "postId": "03450934509345", 
+    "content": "New!",
+    "author": "Talel"
+}
+
+### Add a New Comment (second)
+
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+    "postId": "03450934509345", 
+    "content": "New!",
+    "author": "Yuval"
+}
+
+### Get Comments by Post
+
+GET http://localhost:3000/comments/post/03450934509345
+
+### Update a Comment
+
+PUT http://localhost:3000/comments/93450934503945
+Content-Type: application/json
+
+{
+    "content": "Update!"
+}
+
+### Delete a Comment
+
+DELETE http://localhost:3000/comments/93450934503945
