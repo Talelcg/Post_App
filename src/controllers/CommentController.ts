@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import CommentModel from '../models/Comment'; // Rename to avoid collision
-import { AuthenticatedRequest } from '../middlewares/authMiddleware';
+import CommentModel from '../models/Comment';
 
-// Add a Comment
-export const addComment = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const addComment = async (req: Request, res: Response): Promise<void> => {
   try {
     const { content, postId } = req.body;
-    if (!req.user) {
+
+    if (!req.params.userId) {
       res.status(401).json({ message: 'Unauthorized' });
       return;
     }
@@ -14,7 +13,7 @@ export const addComment = async (req: AuthenticatedRequest, res: Response): Prom
     const newComment = await CommentModel.create({
       content,
       postId,
-      userId: req.user.id,
+      userId: req.params.userId,
     });
     res.status(201).json(newComment);
   } catch (error) {
@@ -22,7 +21,6 @@ export const addComment = async (req: AuthenticatedRequest, res: Response): Prom
   }
 };
 
-// Get All Comments
 export const getAllComments = async (req: Request, res: Response): Promise<void> => {
   try {
     const comments = await CommentModel.find();
@@ -32,7 +30,6 @@ export const getAllComments = async (req: Request, res: Response): Promise<void>
   }
 };
 
-// Get Comments by Post
 export const getCommentsByPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const comments = await CommentModel.find({ postId: req.params.postId });
@@ -42,7 +39,6 @@ export const getCommentsByPost = async (req: Request, res: Response): Promise<vo
   }
 };
 
-// Update Comment
 export const updateComment = async (req: Request, res: Response): Promise<void> => {
   try {
     const comment = await CommentModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -56,7 +52,6 @@ export const updateComment = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-// Delete Comment
 export const deleteComment = async (req: Request, res: Response): Promise<void> => {
   try {
     const comment = await CommentModel.findByIdAndDelete(req.params.id);

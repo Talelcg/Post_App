@@ -1,30 +1,28 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import bcrypt from 'bcrypt';
+import mongoose from "mongoose";
 
-export interface IUser extends Document {
-  username: string;
+export interface IUser {
   email: string;
   password: string;
-  comparePassword(candidatePassword: string): Promise<boolean>;
+  _id?: string;
+  refreshToken?: string[];
 }
 
-const UserSchema: Schema<IUser> = new Schema(
-  {
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+const userSchema = new mongoose.Schema<IUser>({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  { timestamps: true }
-);
-
-UserSchema.pre<IUser>('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
+  password: {
+    type: String,
+    required: true,
+  },
+  refreshToken: {
+    type: [String],
+    default: [],
+  }
 });
 
-UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
-  return bcrypt.compare(candidatePassword, this.password);
-};
+const userModel = mongoose.model<IUser>("Users", userSchema);
 
-export default mongoose.model<IUser>('User', UserSchema);
+export default userModel;

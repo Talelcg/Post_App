@@ -6,15 +6,13 @@ import {
   updateComment,
   deleteComment,
 } from '../controllers/CommentController';
-import { authenticateToken } from '../middlewares/authMiddleware';
+import { authMiddleware } from '../controllers/AuthController';
 
 const router = Router();
 
-// Define routes for comments
-router.post('/', authenticateToken, addComment); // Add a comment
-router.get('/', getAllComments); // Get all comments
-router.get('/post/:postId', getCommentsByPost); // Get comments for a specific post
-router.put('/:id', authenticateToken, updateComment); // Update a comment
-router.delete('/:id', authenticateToken, deleteComment); // Delete a comment
-
+router.post('/', authMiddleware, addComment); 
+router.get('/', getAllComments); 
+router.get('/post/:postId', getCommentsByPost); 
+router.put('/:id', authMiddleware, updateComment); 
+router.delete('/:id', authMiddleware, deleteComment); 
 export default router;
