@@ -26,3 +26,24 @@ const userSchema = new mongoose.Schema<IUser>({
 const userModel = mongoose.model<IUser>("Users", userSchema);
 
 export default userModel;
+
+/**
+* @swagger
+* components:
+* schemas:
+* User:
+* type: object
+* required:
+* - email
+* - password
+* properties:
+* email:
+* type: string
+* description: The user email
+* password:
+* type: string
+* description: The user password
+* example:
+* email: 'bob@gmail.com'
+* password: '123456'
+*/

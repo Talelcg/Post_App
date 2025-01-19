@@ -11,14 +11,14 @@ beforeAll(async () => {
 
   // Register and login to get a token
   await request(app).post('/users/register').send({
-    username: 'poster',
-    email: 'poster@example.com',
-    password: 'password123',
+    username: 'trypost',
+    email: 'trypost@gmail.com',
+    password: 'trypostpassword',
   });
 
   const res = await request(app).post('/users/login').send({
-    email: 'poster@example.com',
-    password: 'password123',
+    email: 'trypost@gmail.com',
+    password: 'trypostpassword',
   });
 
   token = res.body.accessToken;
