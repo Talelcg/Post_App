@@ -13,7 +13,7 @@ const router = Router();
 
 /**
  * @swagger
- * /auth/register:
+ * /users/register:
  *   post:
  *     summary: Registers a new user
  *     tags: [Auth]
@@ -34,7 +34,7 @@ const router = Router();
 
 /**
  * @swagger
- * /auth/login:
+ * /users/login:
  *   post:
  *     summary: Logs in a user
  *     tags: [Auth]
@@ -55,7 +55,7 @@ const router = Router();
 
 /**
  * @swagger
- * /auth/logout:
+ * /users/logout:
  *   get:
  *     summary: Logs out a user
  *     tags: [Auth]
