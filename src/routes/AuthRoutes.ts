@@ -22,14 +22,14 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/models/User'
  *     responses:
  *       200:
  *         description: The newly created user
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/models/User'
  */
 
 /**
@@ -43,14 +43,14 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/models/User'
  *     responses:
  *       200:
  *         description: The access and refresh tokens
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Tokens'
+ *               $ref: '#/models/Tokens'
  */
 
 /**
@@ -70,5 +70,6 @@ const router = Router();
 router.post('/login', authController.login);
 router.post('/register',authController.register);
 router.post('/logout',authController.logout);
+router.post('/refresh',authController.refresh);
 
 export default router;

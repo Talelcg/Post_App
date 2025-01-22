@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "start": "node src/server.ts",
-    "test": "jest --detectOpenHandles --coverage --forceExit"
+    "test": "jest --detectOpenHandles --coverage --forceExit --verbose --debug"
   },
   "author": "talel cohen and yuval zidkani",
   "license": "ISC",

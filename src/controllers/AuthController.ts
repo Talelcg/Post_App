@@ -4,6 +4,22 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Document } from 'mongoose';
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const register = async (req: Request, res: Response) => {
     try {
         const password = req.body.password;
